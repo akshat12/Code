@@ -1,4 +1,4 @@
--module(hw4).
+-module(scan).
 -export([distribute/3, distribute_pos/4]).
 -export([scan_rolling/4, largest_gap_seq/1, largest_gap_seq/2]).
 -export([largest_gap_w/1, largest_gap_w/2, bigger_pair/4, smaller/2, bigger/2]).
