@@ -4,13 +4,12 @@ import java.util.HashSet ;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random ;
-/**
- * Place for your code.
- */
+
+
 public class SudokuSolver {
 
 	/**
-	 * @return names of the authors and their student IDs (1 per line).
+	 * @return names of the authors and their IDs (1 per line).
 	 */
 	public String authors() {
 		

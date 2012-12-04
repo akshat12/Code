@@ -13,7 +13,6 @@ public class FavouriteSLSScheduler extends Scheduler {
 	 * @see scheduler.Scheduler#authorsAndStudentIDs()
 	 */
 	public String authorsAndStudentIDs() {
-		// TODO Your Code Here!
 		return "Yelnil Gabo 70179064 g3d6";
 	}
 

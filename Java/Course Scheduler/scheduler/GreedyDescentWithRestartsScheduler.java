@@ -10,7 +10,7 @@ import java.util.Vector;
 public class GreedyDescentWithRestartsScheduler extends Scheduler {
 
 	/**
-	 * @see scheduler.Scheduler#authorsAndStudentIDs()
+	 * @see scheduler.Scheduler #authorsAndStudentIDs()
 	 */
 	public String authorsAndStudentIDs() {
 		
