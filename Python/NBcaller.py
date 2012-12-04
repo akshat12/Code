@@ -1,5 +1,5 @@
 from __future__ import division
-import classify
+import NaiveBayesClassifier
 #import nb
 import scipy.io
 import numpy as np
