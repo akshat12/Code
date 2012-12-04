@@ -16,24 +16,27 @@ fig    = pl.figure()
 X      = load_patches(images)
 
 pl.set_cmap(pl.cm.Greys_r)
-fig.subplots_adjust(hspace=0.4)
 
 #SVD
 U,S,VT = np.linalg.svd(X, full_matrices=False)
+X_rot  = U * S
+lambda_= np.var( X_rot, axis=0)
+X_wit  = X_rot / np.sqrt(lambda_)
+X_zca  = np.dot(X_wit, VT)
 
-Xrot   = U*S
-lambda_= np.var( Xrot, axis=0)
-D      = 1 / np.sqrt(lambda_)
-D_new  = np.diag(D)
-W_T    = np.dot( np.dot(VT.T,D_new), VT)
-W      = W_T.T
+#plot first patch
+t = fig.add_subplot(1,2,1)
+t.imshow( X[1].reshape(20,20) )
+t.set_title('patch X[1]')
+t.xaxis.set_visible(False)
+t.yaxis.set_visible(False)
 
-for i in xrange(25):
-    t = fig.add_subplot( 5,5, i+1 )
-    t.imshow( W[i].reshape(20,20) )
-    t.set_title(i+1)
-    t.xaxis.set_visible(False)
-    t.yaxis.set_visible(False)
+#plot whitened version
+t = fig.add_subplot(1,2,2)
+t.imshow( X_zca[1].reshape(20,20) )
+t.set_title('whitened patch X[1]')
+t.xaxis.set_visible(False)
+t.yaxis.set_visible(False)
 
 pl.show()
 
