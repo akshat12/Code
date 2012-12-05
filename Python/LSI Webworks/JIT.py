@@ -547,113 +547,21 @@ def JITT( freq, g, rank, filename, quizname ):
     V_k = np.array(VT[0:rank])
     
     left = U_k * S_k
+    
+    # rank_k matrix is representation of the answer log
+    # words as rows columns as students
     Rank_k = np.outer( left, V_k.T )
-    print_to_file('RankMatrix.txt', Rank_k)
+
+    # recreate rank_k wordle
+    # print out rank_k matrix 
+    word_freq_Rank_k = [ round(np.sum(row)) for row in Rank_k ]
+    Rank_k_dict = dict(zip(word_array, word_freq_Rank_k))
+    Rank_k_wordle = recreate_wordle_matrix(Rank_k_dict)
+    
+    print_to_file('Rank_k_wordle.txt', Rank_k_wordle)
 
     
 if __name__=="__main__":
 
     JITT( 0, 0, 1, 'answer_log', 'essayType')
-    # import the file
-   # reader = csv.reader(open('attenuation.csv', 'rb'), delimiter=',', quoting=csv.QUOTE_NONE)
-    #reader = csv.reader(open('data2.csv', 'rb'), delimiter=',', quoting=csv.QUOTE_NONE)
-    #reader = csv.reader(open('data3.csv', 'rb'), delimiter=',', quoting=csv.QUOTE_NONE)
-    
-    # convert to a list
-    #x = list(reader)
-
-    # then convert to a numpy matrix
-    #matrix = np.array(x)
-    
-    # clean up the matrix then prune unneeded data
-    
-    #clean = clean_up_data(matrix)
-
-    # this matrix is only clean, no prunning
-    #clean_no_prune = clean_up_data_no_prune(matrix)
-
-    # count words, returns dictionary of
-    # word frequency for the whole data set
-    #total_dict = count_all_words(clean)
-    
-    # decide if we should put a minimum threshold
-    # set threshold to > 1 occurence
-    # use the dictionary 'total' as a refernce 
-    # this will return a new dictionary, all its
-    # values are now > 1 (the minimum we set)
-    #final_dictionary = set_minimum(total_dict, 1)
-   
-    # this is the fix to dampen explain and equation
-    # TODO: find better way
-    #final_dictionary['explain'] = final_dictionary['attenuation']
-    #final_dictionary['equation'] = final_dictionary['attenuation']
-      
-    # get a dictionary with {key, value}
-    # keys are the words, values are set to zero
-    #zero_dict = set_dict_values_to_zero(final_dictionary)
-    
-    # matrix 'a' is a matrix of numbers
-    # each number is a frequency
-    # student are rows, words are columns
-    #a = word_matrix(clean, zero_dict)
-
-    # demonstrate how to save and load to a file
-    #save_matrix_to_file( 'matrix', a)
-    #a_data = load_matrix_from_file( 'matrix' )
-    #save_dict_file( 'lol', zero_dict )
-    #d = open_dict_file ( 'lol' )
-    
-    # since we want the words as rows
-    # and the students as columns, get the transpose
-    #doc_matrix = a_data.T # words as columns, students as rows
-    
-    # need to recreate wordle data
-    # original doc - create dictionary without pruning
-    # pruned doc - this is just final_dictionary
-    # SVD doc - this returns a numpy array, need to sum
-    #A = weight_matrix( doc_matrix, 'log', 'entropy')
-
-
-    #answer_dict = count_all_words(answermatrix)
-    #print answermatrix
-    #print answer_dict
-
-    # example of reading from answer log
-    # first param = name of file
-    # 2nd param = name of quiz
-    # 3rd param = numbers in the quiz that are relevant 
-    answermatrix = read_answer_log( 'answer_log', 'essayType', [1])
-    print_to_file('rawfile.txt', answermatrix)
-
-    clean_matrix = clean_up_data(answermatrix)    
-    print_to_file('cleaned_matrix.txt', clean_matrix)
-
-    print clean_matrix
-
-    #print re.sub( '^[0-9]{1,2}([,.][0-9]{1,2})?$', r'^[0-9]{1,2}([,.][0-9]{1,2})?$', "4.5")
-    #print re.sub("[-+]?[0-9]*\.?[A-Z0-9]", "[-+]?[0-9]*\.?[A-Z0-9]", answermatrix[0])    
-    # 3 
-    #Original_doc_dictionary = count_all_words(clean_no_prune)
-    #Pruned_doc_dictionary = final_dictionary
-    #SVD_doc_dictionary = doc_matrix
-    # get SVD doc
-    #U,S,VT = np.linalg.svd(SVD_doc_dictionary, full_matrices=False)
-    
-   # U1 = np.array(U.T[0])
-   # S1 = np.array(S[0])
-   # VT1 = np.array(VT[0])
-    
-    #rank1 = U1 * S1
-    #rank1 = np.outer( rank1, VT1.T )
-    
-    #word_array = dict_to_array( final_dictionary )
-    # only get the first column
-    #word_array = word_array[0:,0]
-    
-    #rank1_word_array = [ round(np.sum(row)) for row in rank1 ]
-    #r1_zip = dict(zip(word_array, rank1_word_array))
-
-    #wordle_original = recreate_wordle_matrix( Original_doc_dictionary )
-    #wordle_pruned = recreate_wordle_matrix( Pruned_doc_dictionary )
-    #wordle_rank1 = recreate_wordle_matrix( r1_zip )
    
